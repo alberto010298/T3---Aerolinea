@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace = "layout/layout :: head"></head>
+<body>
+<header th:replace = "layout/layout :: header"></header>
+
+<div class = "container">
+
+	<div class="alert alert-success" role="alert">
+	<h1>Sistema de Aerolinea SkyAirlines</h1>
+	</div>
+	
+	<img class="mb-4" th:src="@{/images/agencias.jpg}" width= 500 height= 400 alt="logo" >
+	<img class="mb-4" th:src="@{/images/1.jpg}" width= 600 height= 400 alt="logo" >
+</div>
+
+<footer th:replace = "layout/layout :: footer"></footer>
+</body>
+</html>

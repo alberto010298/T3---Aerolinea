@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head"></head>
+<body>
+	<header th:replace="layout/layout :: header"></header>
+
+	<div class="container">
+
+		<header class="col-sm-6">
+			<div class="card text">
+
+				<div class="card-header bg-success">Reserva tu vuelo</div>
+				<div class="card-body bg-warning">
+					<h5 class="card-title">Datos de pasajero</h5>
+					<p class="card-text">
+					<form th:action="@{/pasajero/save}" th:object="${pasajero}"
+						method="post">
+						<div class="form-row">
+						   <div class="form-group col-md-6">
+						       <label for="dni">DNI:</label> 
+						       <input type="text" class="form-control" 
+							   placeholder="DNI"
+							   th:field="*{dni}">
+					       </div>
+					       <div class="form-group col-md-6">
+						       <label for="fechaNacimiento">Fecha de nacimiento:</label> 
+						       <input type="text" class="form-control" 
+							   placeholder="Fecha de nacimiento"
+							   th:field="*{fechaNacimiento}">
+					       </div>
+					       <div class="form-group col-md-6">
+						       <label for="edad">Edad:</label> 
+						       <input type="text" class="form-control" 
+							   placeholder="Edad"
+							   th:field="*{edad}">
+					       </div>
+						    <div class="form-group col-md-6">
+						       <label for="nombre">Nombre:</label> 
+						       <input type="text" class="form-control" 
+							   placeholder="Nombre"
+							   th:field="*{nombre}">
+					       </div>
+					       <div class="form-group col-md-6">
+						       <label for="apellidoPat">Apellido Paterno:</label> 
+						       <input type="text" class="form-control" 
+							   placeholder="Apellido Paterno"
+							   th:field="*{apellidoPat}">
+					       </div>
+					       <div class="form-group col-md-6">
+						       <label for="apellidoMat">Apellido Materno:</label> 
+						       <input type="text" class="form-control" 
+							   placeholder="Apellido Materno"
+							   th:field="*{apellidoMat}">
+					       </div>
+					       <div class="form-group col-md-6">
+						       <label for="fechaIda">Fecha Ida:</label> 
+						       <input type="text" class="form-control" 
+							   placeholder="yyyy/mm/dd"
+							   th:field="*{fechaIda}">
+					       </div>
+					       <div class="form-group col-md-6">
+						       <label for="fechaVuelta">Fecha Vuelta:</label> 
+						       <input type="text" class="form-control" 
+							   placeholder="yyyy/mm/dd"
+							   th:field="*{fechaVuelta}">
+					       </div>
+					       <div class="form-group col-md-6">
+						       <label for="cabina">Cabina:</label> 
+						       <select th:field="*{cabina}" class="form-control">
+					           <option th:each="cabinas : ${cabin}"
+					      	   th:value="${cabinas.id}" th:text="${cabinas.nombre}"></option>
+					       </select>
+					      </div>
+					      <div class="form-group col-md-6">
+						       <label for="control">Control:</label> 
+						       <select th:field="*{control}" class="form-control">
+					           <option th:each="controles : ${contr}"
+					      	   th:value="${controles.id}" th:text="${controles.nombre}"></option>
+					       </select>
+					      </div>
+					      <div class="form-group col-md-6">
+						       <label for="origen">Origen:</label> 
+						       <select th:field="*{origen}" class="form-control">
+					           <option th:each="origenes : ${orig}"
+					      	   th:value="${origenes.id}" th:text="${origenes.nombre}"></option>
+					       </select>
+					      </div>
+					      <div class="form-group col-md-6">
+						       <label for="destino">Destino:</label> 
+						       <select th:field="*{destino}" class="form-control">
+					           <option th:each="destinos : ${dest}"
+					      	   th:value="${destinos.id}" th:text="${destinos.nombre}"></option>
+					       </select>
+					      </div>
+					      <div class="col-md-7">
+									<div class="form-check">
+										<input class="form-check-input" type="radio" name="gridRadios"
+											id="gridRadios1" value="option1" checked> <label
+											class="form-check-label" for="gridRadios1"> Ida y vuelta </label>
+									</div>
+									<div class="form-check">
+										<input class="form-check-input" type="radio" name="gridRadios"
+											id="gridRadios1" value="option1" checked> <label
+											class="form-check-label" for="gridRadios1"> Solo Ida</label>
+									</div>
+						  </div>
+						  <br></br>
+					      <div class="form-group col-md-6">
+						       <label for="genero">Genero:</label> 
+						       <select th:field="*{genero}" class="form-control">
+					           <option th:each="generos : ${gener}"
+					      	   th:value="${generos.id}" th:text="${generos.nombre}"></option>
+					       </select>
+					      </div>
+					      <div class="form-group col-md-6">
+						       <label for="habitacion">Habitacion:</label> 
+						       <select th:field="*{habitacion}" class="form-control">
+					           <option th:each="habitaciones : ${habitac}"
+					      	   th:value="${habitaciones.id}" th:text="${habitaciones.nroCamas}"></option>
+					       </select>
+					      </div>
+					      
+					      <div class="form-group col-md-6">
+						       <label for="hotel">Hotel:</label> 
+						       <select th:field="*{hotel}" class="form-control">
+					           <option th:each="hoteles : ${hot}"
+					      	   th:value="${hoteles.codigo}" th:text="${hoteles.nombre}"></option>
+					       </select>
+					      </div> 
+					      <div class="form-group col-md-6">
+						       <label for="moneda">Moneda:</label> 
+						       <select th:field="*{moneda}" class="form-control">
+					           <option th:each="monedas : ${moned}"
+					      	   th:value="${monedas.id}" th:text="${monedas.nombre}"></option>
+					       </select>
+					      </div>
+					      <div class="form-group col-md-6">
+						       <label for="nacionalidad">Nacionalidad:</label> 
+						       <select th:field="*{nacionalidad}" class="form-control">
+					           <option th:each="nacionalidades : ${nacionalid}"
+					      	   th:value="${nacionalidades.id}" th:text="${nacionalidades.nombre}"></option>
+					       </select>
+					      </div>
+					      <div class="form-group col-md-6">
+						       <label for="pago">Pago:</label> 
+						       <select th:field="*{pago}" class="form-control">
+					           <option th:each="pagos : ${pag}"
+					      	   th:value="${pagos.id}" th:text="${pagos.nombre}"></option>
+					       </select>
+					      </div>
+					      <div class="form-group col-md-6">
+						       <label for="seguro">Seguro:</label> 
+						       <select th:field="*{seguro}" class="form-control">
+					           <option th:each="seguros : ${segur}"
+					      	   th:value="${seguros.id}" th:text="${seguros.nombre}"></option>
+					       </select>
+					      </div>
+					      <div class="form-group col-md-6">
+						       <label for="tipohabitacion">Tipo de Habitacion:</label> 
+						       <select th:field="*{tipohabitacion}" class="form-control">
+					           <option th:each="tipohabitaciones : ${tipohabit}"
+					      	   th:value="${tipohabitaciones.id}" th:text="${tipohabitaciones.nombre}"></option>
+					       </select>
+					      </div>
+					      <div class="form-group col-md-6">
+						       <label for="tipohotel">Tipo de Hotel:</label> 
+						       <select th:field="*{tipohotel}" class="form-control">
+					           <option th:each="tipohoteles : ${tipohot}"
+					      	   th:value="${tipohoteles.id}" th:text="${tipohoteles.nombre}"></option>
+					       </select>
+					      </div>
+					      <div class="form-group col-md-6">
+						       <label for="tipopasajero">Tipo de Pasajero:</label> 
+						       <select th:field="*{tipopasajero}" class="form-control">
+					           <option th:each="tipopasajeros : ${tipopasaj}"
+					      	   th:value="${tipopasajeros.id}" th:text="${tipopasajeros.nombre}"></option>
+					       </select>
+					      </div>	
+					      			      									
+						</div>
+						
+						<button type="submit" class="btn btn-primary">Reservar</button>
+					</form>
+				</div>
+			</div>
+		</header>
+
+	</div>
+
+	<footer th:replace="layout/layout :: footer"></footer>
+</body>
+</html>

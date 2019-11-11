@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org" 
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="layout/layout :: head"></head>
+<body>
+	<header th:replace="layout/layout :: header"></header>
+
+	<div class="container">
+
+		<h1>Lista de hoteles</h1>
+
+		<div class="card text-center">
+			<div class="card-header">Lista de hoteles</div>
+			<div class="card-body">
+				
+				<div th:if="${dangerDel}" class="alert alert-danger" role="alert">
+  					<span th:text="${dangerDel}"></span>
+				</div>
+			
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<th scope="col">#</th>
+							<th scope="col">Nombre</th>
+							<th scope="col">Telefono</th>
+							<th scope="col">Dirección</th>
+							<th scope="col">Precio Promedio en dólares</th>
+							<th scope="col"></th>
+						</tr>
+					</thead>
+					<tbody th:each="hotel: ${hoteles}">
+						<tr>
+							<th scope="row" th:text="${hotel.codigo}">1</th>
+							<td th:text="${hotel.nombre}">Mark</td>
+							<td th:text="${hotel.telefono}">Mark</td>
+							<td th:text="${hotel.direccion}">Mark</td>
+							<td th:text="${hotel.precio}">Mark</td>
+							<td>
+								<a th:href="@{ '/hotel/info/' + ${hotel.codigo} }" class="btn btn-info"> 
+									<i class="fas fa-info"><br></br>Info del hotel</i>
+								</a>
+								<a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{ '/hotel/edit/' + ${hotel.codigo} }" class="btn btn-warning"> 
+									<i class="fas fa-edit"></i> 
+								</a>
+								<a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{ '/hotel/del/' + ${hotel.codigo} }" class="btn btn-danger"> 
+									<i class="fas fa-trash-alt"></i> 
+								</a>							
+							</td>
+						</tr>						
+					</tbody>
+				</table>
+
+			</div>
+			<div sec:authorize="hasRole('ROLE_ADMIN')" class="card-footer text-muted">
+				<a th:href="@{/hotel/nuevo}" class="btn btn-primary"><i class="fas fa-file-alt"></i> Nuevo Hotel</a>
+			</div>
+		</div>
+
+	</div>
+
+	<footer th:replace="layout/layout :: footer"></footer>
+</body>
+</html>
+
+
+
+
+
+
+
+

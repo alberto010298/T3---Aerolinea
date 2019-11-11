@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org" 
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="layout/layout :: head"></head>
+<body>
+	<header th:replace="layout/layout :: header"></header>
+
+	<div class="container">
+
+		<h1>Lista de paquetes</h1>
+
+		<div class="card text-center">
+			<div class="card-header">Lista de paquetes</div>
+			<div class="card-body">
+				
+				<div th:if="${dangerDel}" class="alert alert-danger" role="alert">
+  					<span th:text="${dangerDel}"></span>
+				</div>
+			
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<th scope="col">#</th>
+							<th scope="col">Nombre</th>
+							<th scope="col">Descripcion</th>
+							<th scope="col">Precio en dólares</th>
+							<th scope="col"></th>
+						</tr>
+					</thead>
+					<tbody th:each="paquete: ${paquetes}">
+						<tr>
+							<th scope="row" th:text="${paquete.id}">1</th>
+							<td th:text="${paquete.nombre}">Mark</td>
+							<td th:text="${paquete.descripcion}">Mark</td>
+							<td th:text="${paquete.precio}">Mark</td>
+							<td>
+								<a th:href="@{ '/pasajero/infor/' + ${paquete.id} }" class="btn btn-info"> 
+									<i class="fas fa-info"></i>
+								</a>
+								<a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{ '/pasajero/edita/' + ${paquete.id} }" class="btn btn-warning"> 
+									<i class="fas fa-edit"></i> 
+								</a>
+								<a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{ '/pasajero/dele/' + ${paquete.id} }" class="btn btn-danger"> 
+									<i class="fas fa-trash-alt"></i> 
+								</a>							
+							</td>
+						</tr>						
+					</tbody>
+				</table>
+
+			</div>
+			<div sec:authorize="hasRole('ROLE_ADMIN')" class="card-footer text-muted">
+				<a th:href="@{/pasajero/nuevopaquete}" class="btn btn-primary"><i class="fas fa-file-alt"></i> Agregar Paquete</a>
+			</div>
+		</div>
+
+	</div>
+
+	<footer th:replace="layout/layout :: footer"></footer>
+</body>
+</html>
+
+
+
+
+
+
+
+

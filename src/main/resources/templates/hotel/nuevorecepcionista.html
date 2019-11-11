@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head"></head>
+<body>
+	<header th:replace="layout/layout :: header"></header>
+
+	<div class="container">
+
+		<h1>Nuevo Recepcionista</h1>
+
+		<div class="card">
+			<div class="card-header">Registro de nuevo recepcionista</div>
+			<div class="card-body">
+
+				<form th:action="@{/hotel/saverecepcionista}" 
+					th:object="${recepcionista}" method="post">
+					<div class="form-group">
+						<label for="id">Codigo:</label> 
+						<input type="text" class="form-control" 
+							placeholder="codigo de recepcionista"
+							th:field="*{id}">
+					</div>
+					<div class="form-group">
+						<label for="nombre">Nombre:</label> 
+						<input type="text" class="form-control" 
+							placeholder="Nombre de recepcionista"
+							th:field="*{nombre}">
+					</div>
+					<div class="form-group">
+						<label for="observacion">Observacion:</label> 
+						<input type="text" class="form-control" 
+							placeholder="Observacion"
+							th:field="*{observacion}">
+					</div>					
+					<div class="form-group">
+						<label for="telefono">Telefono:</label> 
+						<input type="text" class="form-control" 
+							placeholder="Teléfono de recep"
+							th:field="*{telefono}">
+					</div>
+					
+					<button type="submit" class="btn btn-primary">
+						<i class="fas fa-save"></i> Grabar
+					</button>
+					<a th:href="@{/hotel}" class="btn btn-danger"> 
+						<i class="fas fa-undo"></i> Cancelar 
+					</a>
+				</form>
+
+			</div>
+		</div>
+
+
+	</div>
+
+	<footer th:replace="layout/layout :: footer"></footer>
+</body>
+</html>
